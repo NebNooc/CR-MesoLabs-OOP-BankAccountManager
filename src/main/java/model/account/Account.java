@@ -3,6 +3,7 @@ package model.account;
 public abstract class Account {
     private Integer accountNumber;
     private Double accountBalance = 0.00;
+    private String accountStatus;
 
     public Account(){
         this.accountNumber = generateAccountNumer();
@@ -32,4 +33,12 @@ public abstract class Account {
 
         return (int)(Math.random() * range) + min;
         }
+
+    public String getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(String accountStatus) {
+        this.accountStatus = accountStatus;
+    }
 }

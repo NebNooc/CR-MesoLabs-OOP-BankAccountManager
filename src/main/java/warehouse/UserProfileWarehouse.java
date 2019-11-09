@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class UserProfileWarehouse {
 
-    private volatile Map<String, UserProfile> userProfiles = new HashMap<>();
+    private volatile Map<String, UserProfile> userProfiles = new HashMap<String, UserProfile>();
 
     public void add(UserProfile userProfile) {
         userProfiles.put(userProfile.getUserName(),userProfile);
