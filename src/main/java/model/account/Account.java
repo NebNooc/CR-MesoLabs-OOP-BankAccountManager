@@ -1,21 +1,27 @@
 package model.account;
 
 import model.user.UserProfile;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public abstract class Account {
     private Integer accountNumber;
     private Double accountBalance = 0.00;
     private String accountStatus = "Open";
     private UserProfile accountOwner;
+    Map<Date, String> transactionHistory;
 
 
     public Account(){
         this.accountNumber = generateAccountNumer();
+        this.transactionHistory = new LinkedHashMap<Date, String>();
     }
 
     public Account(UserProfile accountOwner){
         this.accountNumber = generateAccountNumer();
         this.accountOwner = accountOwner;
+        this.transactionHistory = new LinkedHashMap<Date, String>();
     }
 
 
