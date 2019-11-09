@@ -1,27 +1,26 @@
 package model.account;
 
 import model.user.UserProfile;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
+import java.util.ArrayList;
 
 public abstract class Account {
     private Integer accountNumber;
     private Double accountBalance = 0.00;
     private String accountStatus = "Open";
     private UserProfile accountOwner;
-    Map<Date, String> transactionHistory;
+    private ArrayList<String> transactionHistory;
 
 
     public Account(){
         this.accountNumber = generateAccountNumer();
-        this.transactionHistory = new LinkedHashMap<Date, String>();
+        this.transactionHistory = new ArrayList<String>();
     }
 
     public Account(UserProfile accountOwner){
         this.accountNumber = generateAccountNumer();
         this.accountOwner = accountOwner;
-        this.transactionHistory = new LinkedHashMap<Date, String>();
+        this.transactionHistory = new ArrayList<String>();
     }
 
 
@@ -65,4 +64,12 @@ public abstract class Account {
         this.accountOwner = accountOwner;
     }
 
+
+    public ArrayList<String> getTransactionHistory() {
+        return transactionHistory;
+    }
+
+    public void setTransactionHistory(ArrayList<String> transactionHistory) {
+        this.transactionHistory = transactionHistory;
+    }
 }
