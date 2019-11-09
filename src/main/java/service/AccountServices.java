@@ -44,7 +44,7 @@ public class AccountServices {
 
     public List<Account> getAllAccountsForAUser(UserProfile userProfile){
         List<Integer> allAccountNumbers = userProfile.getAccountNumberList();
-        List<Account> allAccountsForGivenUser = new ArrayList<>();
+        List<Account> allAccountsForGivenUser = new ArrayList<Account>();
         for(Integer accountNumber : allAccountNumbers){
             Account account = accountWarehouse.getAccountByAccountNumber(accountNumber);
             allAccountsForGivenUser.add(account);

@@ -15,7 +15,7 @@ public class UserProfile {
     this.lastName = lastName;
     this.userName = userName;
     this.password = password;
-    accountNumberList = new ArrayList<>();
+    accountNumberList = new ArrayList<Integer>();
     }
 
     public String getFirstName() {

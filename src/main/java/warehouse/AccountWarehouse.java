@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class AccountWarehouse {
 
-    private volatile Map<Integer, Account> accounts = new HashMap<>();
+    private volatile Map<Integer, Account> accounts = new HashMap<Integer, Account>();
 
     public Account getAccountByAccountNumber(Integer accountNumber){
         return accounts.get(accountNumber);
