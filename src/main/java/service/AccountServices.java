@@ -72,4 +72,8 @@ public class AccountServices {
         } else return "Investment Account";
     }
 
+    public String writeToHistory(Account account, String message) {
+        return null;
+    }
+
 }

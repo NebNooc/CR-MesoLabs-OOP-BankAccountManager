@@ -1,12 +1,21 @@
 package model.account;
 
+import model.user.UserProfile;
+
 public abstract class Account {
     private Integer accountNumber;
     private Double accountBalance = 0.00;
-    private String accountStatus;
+    private String accountStatus = "Open";
+    private UserProfile accountOwner;
+
 
     public Account(){
         this.accountNumber = generateAccountNumer();
+    }
+
+    public Account(UserProfile accountOwner){
+        this.accountNumber = generateAccountNumer();
+        this.accountOwner = accountOwner;
     }
 
 
@@ -41,4 +50,13 @@ public abstract class Account {
     public void setAccountStatus(String accountStatus) {
         this.accountStatus = accountStatus;
     }
+
+    public UserProfile getAccountOwner() {
+        return accountOwner;
+    }
+
+    public void setAccountOwner(UserProfile userProfile) {
+        this.accountOwner = accountOwner;
+    }
+
 }
