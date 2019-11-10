@@ -34,7 +34,14 @@ public class AccountServices {
 
     public Double withdraw(Account currentAccount, Double withdrawAmt) {
         Double currentBalance = currentAccount.getAccountBalance();
-        Double newBalance = currentBalance - withdrawAmt;
+        Double newBalance;
+        if(withdrawAmt <= currentBalance){
+            newBalance = currentBalance - withdrawAmt;
+        }
+        else{
+            System.out.println("\nSorry, You have insufficient funds in your account, please lower your withdrawl amount.\n");
+            newBalance  = currentBalance;
+        }
         currentAccount.setAccountBalance(newBalance);
         return newBalance;
     }
@@ -47,8 +54,14 @@ public class AccountServices {
     }
 
     public void transferBetweenAccounts(Account sourceAccount, Account targetAccount, Double transferAmt) {
-        withdraw(sourceAccount, transferAmt);
-        deposit(targetAccount, transferAmt);
+        Double currentBalance = sourceAccount.getAccountBalance();
+        if(transferAmt <= currentBalance){
+            withdraw(sourceAccount, transferAmt);
+            deposit(targetAccount, transferAmt);
+        } else{
+            System.out.println("\nThere are insufficient funds in the Transferring Account for this transfer.\n");
+        }
+
     }
 
     public List<Account> getAllAccountsForAUser(UserProfile userProfile){
