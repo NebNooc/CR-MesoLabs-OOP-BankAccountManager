@@ -23,6 +23,15 @@ public class AccountServices {
         return currentAccount.getAccountBalance();
     }
 
+    public String getAccountStatus(Account currentAccount) {
+        return currentAccount.getAccountStatus();
+    }
+
+    public void setAccountStatus(Account currentAccount, String status) {
+        currentAccount.setAccountStatus(status);
+        //return currentAccount.getAccountStatus();
+    }
+
     public Double withdraw(Account currentAccount, Double withdrawAmt) {
         Double currentBalance = currentAccount.getAccountBalance();
         Double newBalance = currentBalance - withdrawAmt;

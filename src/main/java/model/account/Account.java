@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public abstract class Account {
     private Integer accountNumber;
     private Double accountBalance = 0.00;
-    private String accountStatus = "Open";
+    private String accountStatus;
     private UserProfile accountOwner;
     private ArrayList<String> transactionHistory;
 
@@ -15,6 +15,7 @@ public abstract class Account {
     public Account(){
         this.accountNumber = generateAccountNumer();
         this.transactionHistory = new ArrayList<String>();
+        this.accountStatus = "Open";
     }
 
     public Account(UserProfile accountOwner){

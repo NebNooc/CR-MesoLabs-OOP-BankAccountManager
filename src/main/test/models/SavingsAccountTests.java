@@ -22,4 +22,20 @@ public class SavingsAccountTests {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void getStatus() {
+        String expected = "Open";
+        String actual = savingsAccount.getSatus();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void setStatus() {
+        String expected = "Closed";
+        savingsAccount.setStatus("Closed");
+        String actual = savingsAccount.getStatus();
+
+        Assert.assertEquals(expected, actual);
+    }
 }
