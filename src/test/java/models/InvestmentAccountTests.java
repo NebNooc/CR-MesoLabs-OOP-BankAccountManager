@@ -1,9 +1,11 @@
-package modelsold;
+package models;
 
 import model.account.InvestmentAccount;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class InvestmentAccountTests {
 
     InvestmentAccount investmentAccount = new InvestmentAccount();

@@ -11,6 +11,11 @@ import java.util.List;
 
 public class AccountServices {
     private AccountWarehouse accountWarehouse;
+
+    public AccountServices() {
+
+    }
+
     public AccountServices(AccountWarehouse accountWarehouse){
         this.accountWarehouse = accountWarehouse;
     }

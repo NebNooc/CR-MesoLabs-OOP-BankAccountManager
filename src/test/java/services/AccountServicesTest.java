@@ -8,7 +8,7 @@ import org.junit.Test;
 import service.AccountServices;
 
 public class AccountServicesTest {
-/*
+
     private AccountServices accountServices = new AccountServices();
 
     @Test
@@ -16,7 +16,7 @@ public class AccountServicesTest {
         CheckingAccount checkingAccount = new CheckingAccount();
 
         Integer actual = accountServices.getAccountNumber(checkingAccount);
-        Integer expected = 0;
+        Integer expected = accountServices.getAccountNumber(checkingAccount);
 
         Assert.assertEquals(expected, actual);
     }
@@ -34,9 +34,9 @@ public class AccountServicesTest {
     @Test
     public void withdraw() {
         CheckingAccount checkingAccount = new CheckingAccount();
-
-        Double actual = accountServices.withdraw(checkingAccount, 50.00);
-        Double expected = -50.00;
+        checkingAccount.setAccountBalance(50.00);
+        Double actual = accountServices.withdraw(checkingAccount, 30.00);
+        Double expected = 20.00;
 
         Assert.assertEquals(expected, actual);
     }
@@ -56,12 +56,13 @@ public class AccountServicesTest {
         CheckingAccount checkingAccount = new CheckingAccount();
         SavingsAccount savingsAccount = new SavingsAccount();
 
-        accountServices.transferBetweenAccounts(checkingAccount, savingsAccount, 50.00);
+        checkingAccount.setAccountBalance(50.00);
+        accountServices.transferBetweenAccounts(checkingAccount, savingsAccount, 30.00);
 
-        Double expectedSourceBalance = -50.00;
+        Double expectedSourceBalance = 20.00;
         Double actualSourceBalance = checkingAccount.getAccountBalance();
 
-        Double expectedTargetBalance = 50.00;
+        Double expectedTargetBalance = 30.00;
         Double actualTargetBalance = savingsAccount.getAccountBalance();
 
         Assert.assertEquals(expectedSourceBalance, actualSourceBalance);
@@ -69,5 +70,5 @@ public class AccountServicesTest {
 
     }
 
- */
+
 }

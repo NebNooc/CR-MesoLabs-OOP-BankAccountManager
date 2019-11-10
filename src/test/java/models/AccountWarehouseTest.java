@@ -1,4 +1,4 @@
-package modelsold;
+package models;
 
 import static org.junit.Assert.*;
 

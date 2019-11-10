@@ -2,10 +2,12 @@ package models;
 
 import model.account.CheckingAccount;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+@Ignore
 public class CheckingAccountTest {
 
 CheckingAccount checkingAccount = new CheckingAccount();
