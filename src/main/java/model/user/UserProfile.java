@@ -30,6 +30,7 @@ public class UserProfile {
         return this.userName;
     }
 
+
     public String getPassword() {
         return this.password;
     }

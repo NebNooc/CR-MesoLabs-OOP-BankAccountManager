@@ -3,6 +3,7 @@ package warehouse;
 import model.user.UserProfile;
 
 import java.util.HashMap;
+
 import java.util.Map;
 
 public class UserProfileWarehouse {
