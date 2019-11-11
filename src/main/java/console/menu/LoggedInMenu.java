@@ -22,7 +22,8 @@ public class LoggedInMenu {
                 "\nWhat would you like to do?\n\n" +
                         "1. Access Account\n" +
                         "2. Create Account\n" +
-                        "3. Back to Main Menu \n");
+                        "3. Account Settings\n" +
+                        "4. Back to Main Menu \n");
         loggedInMenuActions(input);
     }
 
@@ -37,6 +38,10 @@ public class LoggedInMenu {
                 createAccountMenu.getCreateAccountMenu();
                 break;
             case 3:
+                AccountSettings selectAccountSettings = new AccountSettings(userProfileWarehouse, accountWarehouse, userProfile);
+                selectAccountSettings.getAccountSettingsMenu();
+                break;
+            case 4:
                 Console.println("Bye!");
                 System.exit(0);
                 break;
