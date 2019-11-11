@@ -73,4 +73,16 @@ public abstract class Account {
     public void setTransactionHistory(ArrayList<String> transactionHistory) {
         this.transactionHistory = transactionHistory;
     }
+
+    public void addToHistory(String message) {
+        transactionHistory.add(message);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (String message : transactionHistory) {
+            sb.append(message + "\n");
+        } return sb.toString();
+    }
 }

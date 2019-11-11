@@ -1,17 +1,18 @@
 package models;
 
+import model.account.Account;
 import model.account.SavingsAccount;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class SavingsAccountTests {
+    Account savingsAccount;
 
-    SavingsAccount savingsAccount = new SavingsAccount();
-
-    @Test
-    public void generateAccountNumberTest() {
-        System.out.println(savingsAccount.getAccountNumber());
-
+    @Before
+    public void testSetup() {
+        Account savingsAccount = new SavingsAccount();
+        this.savingsAccount = savingsAccount;
     }
 
     @Test
@@ -25,7 +26,7 @@ public class SavingsAccountTests {
     @Test
     public void getStatus() {
         String expected = "Open";
-        String actual = savingsAccount.getSatus();
+        String actual = savingsAccount.getAccountStatus();
 
         Assert.assertEquals(expected, actual);
     }
@@ -33,8 +34,8 @@ public class SavingsAccountTests {
     @Test
     public void setStatus() {
         String expected = "Closed";
-        savingsAccount.setStatus("Closed");
-        String actual = savingsAccount.getStatus();
+        savingsAccount.setAccountStatus("Closed");
+        String actual = savingsAccount.getAccountStatus();
 
         Assert.assertEquals(expected, actual);
     }

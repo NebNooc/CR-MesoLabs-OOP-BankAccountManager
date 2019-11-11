@@ -33,9 +33,10 @@ public class AccountActionMenu {
                         "2. Deposit\n" +
                         "3. Transfer money\n" +
                         "4. Check balance\n" +
-                        "5. Change Account Status \n"+
-                        "6. Back to Previous Menu \n" +
-                        "7. Back to Main Menu \n");
+                        "5. Change Account Status \n" +
+                        "6. Print History \n" +
+                        "7. Back to Previous Menu \n" +
+                        "8. Back to Main Menu \n");
         accountActionMenuActions(input);
     }
     public void changeStatusMenu() {
@@ -155,12 +156,15 @@ public class AccountActionMenu {
             case 5:
                 changeStatusMenu();
                 break;
-
             case 6:
+                String history = accountServices.printTransactionHistory(currentAccount);
+                Console.print(history);
+                getAccountActionMenu();
+            case 7:
                 LoggedInMenu loggedInMenu = new LoggedInMenu(userProfileWarehouse, accountWarehouse, userProfile);
                 loggedInMenu.getLoggedInMenu();
                 break;
-            case 7:
+            case 8:
                 ConsoleMock consoleMock = new ConsoleMock(userProfileWarehouse, accountWarehouse);
                 consoleMock.mainMenu();
                 break;
