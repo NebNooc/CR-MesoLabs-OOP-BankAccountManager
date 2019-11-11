@@ -23,9 +23,29 @@ public class AccountServices {
         return currentAccount.getAccountBalance();
     }
 
+    public String getAccountStatus(Account currentAccount) {
+        return currentAccount.getAccountStatus();
+    }
+
+    public void setAccountStatus(Account currentAccount, String status) {
+        currentAccount.setAccountStatus(status);
+        //return currentAccount.getAccountStatus();
+    }
+
     public Double withdraw(Account currentAccount, Double withdrawAmt) {
         Double currentBalance = currentAccount.getAccountBalance();
-        Double newBalance = currentBalance - withdrawAmt;
+        Double newBalance;
+        if(withdrawAmt <= currentBalance){
+            newBalance = currentBalance - withdrawAmt;
+            String historyMessage = withdrawAmt + " withdrawn.";
+            writeToHistory(currentAccount, historyMessage);
+        }
+        else{
+            Console.print("\nSorry, You have insufficient funds in your account, please lower your withdrawl amount.\n");
+            newBalance  = currentBalance;
+            String historyMessage = "Attempted overdraft.";
+            writeToHistory(currentAccount, historyMessage);
+        }
         currentAccount.setAccountBalance(newBalance);
         return newBalance;
     }
@@ -34,12 +54,24 @@ public class AccountServices {
         Double currentBalance = currentAccount.getAccountBalance();
         Double newBalance = currentBalance + depositAmt;
         currentAccount.setAccountBalance(newBalance);
+        String historyMessage = depositAmt + " deposited.";
+        writeToHistory(currentAccount, historyMessage);
         return newBalance;
     }
 
     public void transferBetweenAccounts(Account sourceAccount, Account targetAccount, Double transferAmt) {
-        withdraw(sourceAccount, transferAmt);
-        deposit(targetAccount, transferAmt);
+        Double currentBalance = sourceAccount.getAccountBalance();
+        if(transferAmt <= currentBalance){
+            withdraw(sourceAccount, transferAmt);
+            deposit(targetAccount, transferAmt);
+            String historyMessage = transferAmt + " transferred to " + targetAccount.getAccountNumber() + ".";
+            writeToHistory(sourceAccount, historyMessage);
+        } else{
+            Console.print("\nThere are insufficient funds in the Transferring Account for this transfer.\n");
+            String historyMessage = "Attempted transfer with insufficient funds.";
+            writeToHistory(sourceAccount, historyMessage);
+        }
+
     }
 
     public List<Account> getAllAccountsForAUser(UserProfile userProfile){
@@ -73,11 +105,16 @@ public class AccountServices {
     }
 
     public String writeToHistory(Account account, String message) {
-        return null;
+        account.addToHistory(message);
+        return message;
     }
 
-    public String printTransactionHistory() {
-        return null;
+    public String printTransactionHistory(Account account) {
+        ArrayList<String> history = account.getTransactionHistory();
+        StringBuilder sb = new StringBuilder();
+        for (String message : history) {
+            sb.append(message + "\n");
+        }
+        return sb.toString();
     }
-
 }

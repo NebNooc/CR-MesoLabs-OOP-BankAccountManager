@@ -33,9 +33,93 @@ public class AccountActionMenu {
                         "2. Deposit\n" +
                         "3. Transfer money\n" +
                         "4. Check balance\n" +
-                        "5. Back to Previous Menu \n" +
-                        "6. Back to Main Menu \n");
+                        "5. Change Account Status \n" +
+                        "6. Print History \n" +
+                        "7. Back to Previous Menu \n" +
+                        "8. Back to Main Menu \n");
         accountActionMenuActions(input);
+    }
+    public void changeStatusMenu() {
+        String accountStatus = accountServices.getAccountStatus(currentAccount);
+        if (accountStatus == "Open") {
+            Integer input = Console.getIntegerInput(
+                    "\nWhat would you like to do?\n\n" +
+                            "1. Close Account\n" +
+                            "2. Freeze Account (OFAC)\n" +
+                            "3. Back to Previous Menu \n");
+            changeOpenAccountStatus(input);
+        }
+        else if (accountStatus == "OFAC") {
+            Integer input = Console.getIntegerInput(
+                    "\nWhat would you like to do?\n\n" +
+                            "1. Close Account\n" +
+                            "2. Unfreeze Account (OFAC)\n" +
+                            "3. Back to Previous Menu \n");
+            changeOFACAccountStatus(input);
+        }
+        else if (accountStatus == "Closed") {
+            Console.println("\nThe Account is already closed. You cannot change its status at this point");
+            getAccountActionMenu();
+        }
+    }
+
+    private void changeOpenAccountStatus(Integer input) {
+        switch (input) {
+            case 1:
+                closeAccount();
+                getAccountActionMenu();
+                break;
+            case 2:
+                freezeAccount();
+                getAccountActionMenu();
+                break;
+            default:
+                Console.println("\nInvalid selection. Please try again.");
+                changeStatusMenu();
+        }
+    }
+
+    private void changeOFACAccountStatus(Integer input) {
+        switch (input) {
+            case 1:
+                closeAccount();
+                getAccountActionMenu();
+                break;
+            case 2:
+                unFreezeAccount();
+                getAccountActionMenu();
+                break;
+            default:
+                Console.println("\nInvalid selection. Please try again.");
+                changeStatusMenu();
+        }
+    }
+
+    private void closeAccount() {
+        accountServices.setAccountStatus(currentAccount, "Closed");
+        Console.println("\nThe Account is closed. Please note that you cannot reopen this Account again.");
+
+    }
+
+    private void freezeAccount() {
+        String accountStatus = accountServices.getAccountStatus(currentAccount);
+        if (accountStatus == "Open") {
+            accountServices.setAccountStatus(currentAccount, "OFAC");
+            Console.println("\nThe Account is set to Freeze. Please note that you can choose to unfreeze this Account again.");
+        } else if (accountStatus == "Closed") {
+            Console.println("\nThe Account is already closed. You cannot freeze the closed account");
+        }
+    }
+
+    private void unFreezeAccount() {
+        String accountStatus = accountServices.getAccountStatus(currentAccount);
+        if (accountStatus == "OFAC") {
+            accountServices.setAccountStatus(currentAccount, "Open");
+            Console.println("\nThe Account is now set to Open. Please note that you can start using your Account.");
+        }
+        else if (accountStatus == "Closed") {
+            Console.println("\nThe Account is already closed. You cannot freeze the closed account");
+        }
     }
 
     private void accountActionMenuActions(Integer input) {
@@ -70,10 +154,17 @@ public class AccountActionMenu {
                 getAccountActionMenu();
                 break;
             case 5:
+                changeStatusMenu();
+                break;
+            case 6:
+                String history = accountServices.printTransactionHistory(currentAccount);
+                Console.print(history);
+                getAccountActionMenu();
+            case 7:
                 LoggedInMenu loggedInMenu = new LoggedInMenu(userProfileWarehouse, accountWarehouse, userProfile);
                 loggedInMenu.getLoggedInMenu();
                 break;
-            case 6:
+            case 8:
                 ConsoleMock consoleMock = new ConsoleMock(userProfileWarehouse, accountWarehouse);
                 consoleMock.mainMenu();
                 break;
